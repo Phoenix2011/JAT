@@ -1,0 +1,135 @@
+<view class="card-container">
+  <!-- 卡项筛选区域 -->
+  <view class="filter-section">
+    <checkbox-group bindchange="filterChange">
+      <label class="checkbox">
+        <checkbox value="showAll" checked="{{showAll}}" />显示所有卡项
+      </label>
+    </checkbox-group>
+  </view>
+
+  <!-- 卡项列表区域 -->
+  <view class="card-list">
+    <block wx:if="{{cards.length > 0}}">
+      <view wx:for="{{displayCards}}" wx:key="id" class="card-item {{item.remainingCount <= 0 ? 'card-used' : ''}}" bindtap="showCardDetail" data-id="{{item.id}}">
+        <view class="card-header">
+          <view class="card-name">{{item.name}}</view>
+          <view class="card-status" wx:if="{{item.remainingCount <= 0}}">已用完</view>
+          <view class="card-status card-active" wx:else>可使用</view>
+        </view>
+        <view class="card-info">
+          <view class="card-count">
+            <text>剩余次数：</text>
+            <text class="count-value">{{item.remainingCount}}/{{item.totalCount}}</text>
+          </view>
+          <view class="card-validity">
+            <text>有效期至：</text>
+            <text class="validity-value">{{item.validUntil}}</text>
+          </view>
+        </view>
+        <view class="card-footer">
+          <view class="card-price">¥{{item.price}}</view>
+          <view class="card-actions">
+            <button class="action-btn transfer-btn" catchtap="transferCard" data-id="{{item.id}}">转赠</button>
+            <button class="action-btn detail-btn" catchtap="showCardDetail" data-id="{{item.id}}">详情</button>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view wx:else class="empty-tip">
+      <image class="empty-icon" src="/assets/icons/empty.png"></image>
+      <view class="empty-text">暂无卡项</view>
+    </view>
+  </view>
+
+  <!-- 购买卡项按钮 -->
+  <view class="buy-section">
+    <button class="buy-button" bindtap="navigateToBuy">购买新卡项</button>
+  </view>
+
+  <!-- 卡项详情弹窗 -->
+  <view class="card-detail-modal" wx:if="{{showDetailModal}}">
+    <view class="modal-mask" bindtap="hideCardDetail"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <view class="modal-title">卡项详情</view>
+        <view class="modal-close" bindtap="hideCardDetail">×</view>
+      </view>
+      <view class="modal-body">
+        <view class="detail-item">
+          <view class="detail-label">卡项名称</view>
+          <view class="detail-value">{{currentCard.name}}</view>
+        </view>
+        <view class="detail-item">
+          <view class="detail-label">卡项类型</view>
+          <view class="detail-value">{{currentCard.type === 'single' ? '单次卡' : '多次卡'}}</view>
+        </view>
+        <view class="detail-item">
+          <view class="detail-label">购买日期</view>
+          <view class="detail-value">{{currentCard.purchaseDate}}</view>
+        </view>
+        <view class="detail-item">
+          <view class="detail-label">有效期至</view>
+          <view class="detail-value">{{currentCard.validUntil}}</view>
+        </view>
+        <view class="detail-item">
+          <view class="detail-label">剩余次数</view>
+          <view class="detail-value">{{currentCard.remainingCount}}/{{currentCard.totalCount}}</view>
+        </view>
+        <view class="detail-item">
+          <view class="detail-label">卡项金额</view>
+          <view class="detail-value">¥{{currentCard.price}}</view>
+        </view>
+        
+        <!-- 使用记录 -->
+        <view class="usage-records">
+          <view class="usage-title">使用记录</view>
+          <view class="usage-list">
+            <block wx:if="{{currentCard.usageRecords && currentCard.usageRecords.length > 0}}">
+              <view wx:for="{{currentCard.usageRecords}}" wx:key="id" class="usage-item">
+                <view class="usage-info">
+                  <view class="usage-service">{{item.serviceName}}</view>
+                  <view class="usage-time">{{item.useTime}}</view>
+                </view>
+                <view class="usage-therapist">技师：{{item.therapistName}}</view>
+              </view>
+            </block>
+            <view wx:else class="empty-usage">暂无使用记录</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 转赠弹窗 -->
+  <view class="transfer-modal" wx:if="{{showTransferModal}}">
+    <view class="modal-mask" bindtap="hideTransferModal"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <view class="modal-title">转赠卡项</view>
+        <view class="modal-close" bindtap="hideTransferModal">×</view>
+      </view>
+      <view class="modal-body">
+        <view class="transfer-info">
+          <view class="transfer-card-name">{{currentCard.name}}</view>
+          <view class="transfer-card-count">剩余次数：{{currentCard.remainingCount}}/{{currentCard.totalCount}}</view>
+        </view>
+        <view class="transfer-form">
+          <view class="form-item">
+            <view class="form-label">接收人手机号</view>
+            <input class="form-input" type="number" placeholder="请输入接收人手机号" bindinput="inputReceiverPhone" value="{{receiverPhone}}" />
+          </view>
+          <view class="form-item">
+            <view class="form-label">确认手机号</view>
+            <input class="form-input" type="number" placeholder="请再次输入接收人手机号" bindinput="inputConfirmPhone" value="{{confirmPhone}}" />
+          </view>
+          <view class="form-tips">转赠后卡项将立即转入对方账户，无法撤销，请确认接收人手机号无误</view>
+        </view>
+        <view class="transfer-actions">
+          <button class="cancel-btn" bindtap="hideTransferModal">取消</button>
+          <button class="confirm-btn" bindtap="confirmTransfer" disabled="{{!canTransfer}}">确认转赠</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

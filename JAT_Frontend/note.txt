@@ -1,0 +1,1 @@
+Vue 3.2.47 + Vue Router 4.1.6 + Pinia 2.0.33 + Element Plus 2.3.0

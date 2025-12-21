@@ -1,0 +1,231 @@
+/**service/index.wxss**/
+.container {
+  padding-bottom: 30rpx;
+}
+
+/* 搜索栏 */
+.search-bar {
+  padding: 20rpx;
+  background-color: #FFFFFF;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.search-input-wrap {
+  display: flex;
+  align-items: center;
+  background-color: #F5F5F5;
+  border-radius: 30rpx;
+  padding: 0 20rpx;
+  height: 70rpx;
+}
+
+.search-input {
+  flex: 1;
+  height: 70rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+}
+
+/* 分类选项卡 */
+.category-tabs {
+  background-color: #FFFFFF;
+  border-bottom: 1rpx solid var(--border-color);
+  position: sticky;
+  top: 110rpx;
+  z-index: 99;
+}
+
+.tabs-scroll {
+  white-space: nowrap;
+  width: 100%;
+}
+
+.tabs {
+  display: inline-flex;
+  padding: 0 20rpx;
+}
+
+.tab-item {
+  padding: 20rpx 30rpx;
+  font-size: 28rpx;
+  color: var(--text-color);
+  position: relative;
+}
+
+.tab-item.active {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 4rpx;
+  background-color: var(--primary-color);
+  border-radius: 2rpx;
+}
+
+/* 筛选条件 */
+.filter-bar {
+  display: flex;
+  background-color: #FFFFFF;
+  padding: 20rpx;
+  border-bottom: 1rpx solid var(--border-color);
+  position: sticky;
+  top: 180rpx;
+  z-index: 98;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  margin-right: 40rpx;
+  font-size: 28rpx;
+  color: var(--text-color);
+}
+
+.filter-item.active {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.sort-icon {
+  display: flex;
+  flex-direction: column;
+  margin-left: 6rpx;
+}
+
+.sort-icon image {
+  width: 16rpx;
+  height: 16rpx;
+}
+
+/* 服务列表 */
+.service-list {
+  padding: 20rpx;
+}
+
+.service-item {
+  display: flex;
+  padding: 20rpx;
+  background-color: #FFFFFF;
+  border-radius: 8rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.service-image {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+}
+
+.service-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 10rpx;
+}
+
+.service-desc {
+  font-size: 26rpx;
+  color: var(--text-color-light);
+  margin-bottom: 10rpx;
+  line-height: 1.4;
+}
+
+.service-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.service-price-box {
+  display: flex;
+  align-items: center;
+}
+
+.service-price {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-right: 10rpx;
+}
+
+.service-original-price {
+  font-size: 24rpx;
+  color: var(--text-color-light);
+  text-decoration: line-through;
+}
+
+.service-sales {
+  font-size: 24rpx;
+  color: var(--text-color-light);
+}
+
+.service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10rpx;
+}
+
+.service-package-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 24rpx;
+  color: var(--text-color-light);
+}
+
+.package-validity {
+  color: var(--warning-color);
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+}
+
+.empty-icon {
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: var(--text-color-light);
+}
+
+/* 加载更多 */
+.loading-more {
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 24rpx;
+  color: var(--text-color-light);
+}
+
+/* 没有更多 */
+.no-more {
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 24rpx;
+  color: var(--text-color-light);
+}

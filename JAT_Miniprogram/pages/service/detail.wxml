@@ -1,0 +1,137 @@
+<!--service/detail.wxml-->
+<view class="container">
+  <!-- 服务图片轮播 -->
+  <swiper class="service-banner" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{3000}}" duration="{{500}}">
+    <block wx:for="{{serviceDetail.images}}" wx:key="*this">
+      <swiper-item>
+        <image src="{{item}}" class="banner-image" mode="aspectFill" bindtap="previewImage" data-url="{{item}}"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  
+  <!-- 服务基本信息 -->
+  <view class="service-info card">
+    <view class="service-name">{{serviceDetail.name}}</view>
+    <view class="service-price-box">
+      <text class="service-price">¥{{serviceDetail.price}}</text>
+      <text class="service-original-price" wx:if="{{serviceDetail.originalPrice}}">¥{{serviceDetail.originalPrice}}</text>
+    </view>
+    <view class="service-stats">
+      <text class="service-sales">已售 {{serviceDetail.salesCount}}</text>
+      <text class="service-rating">评分 {{serviceDetail.rating}}</text>
+    </view>
+    <view class="service-tags" wx:if="{{serviceDetail.tags && serviceDetail.tags.length > 0}}">
+      <text class="tag tag-primary" wx:for="{{serviceDetail.tags}}" wx:key="*this">{{item}}</text>
+    </view>
+    
+    <!-- 套餐卡信息 -->
+    <view class="package-info" wx:if="{{serviceDetail.type === 'package'}}">
+      <view class="package-item">
+        <text class="package-label">套餐次数</text>
+        <text class="package-value">{{serviceDetail.totalCount}}次</text>
+      </view>
+      <view class="package-item">
+        <text class="package-label">有效期</text>
+        <text class="package-value">{{serviceDetail.validityDays}}天</text>
+      </view>
+      <view class="package-item">
+        <text class="package-label">使用规则</text>
+        <text class="package-value">{{serviceDetail.usageRules || '无特殊限制'}}</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 服务详情 -->
+  <view class="service-detail card">
+    <view class="section-title">服务详情</view>
+    <view class="detail-content">
+      <rich-text nodes="{{serviceDetail.description}}"></rich-text>
+    </view>
+  </view>
+  
+  <!-- 技师推荐 -->
+  <view class="therapist-recommend card" wx:if="{{recommendTherapists.length > 0}}">
+    <view class="section-title">推荐技师</view>
+    <scroll-view scroll-x="{{true}}" class="therapist-scroll">
+      <view class="therapist-list">
+        <view class="therapist-item" wx:for="{{recommendTherapists}}" wx:key="id" bindtap="navigateToTherapistDetail" data-id="{{item.id}}">
+          <image class="therapist-avatar" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+          <text class="therapist-name">{{item.name}}</text>
+          <text class="therapist-title">{{item.title}}</text>
+          <view class="therapist-rating">
+            <text class="rating-score">{{item.rating}}</text>
+            <text class="rating-count">{{item.ratingCount}}评价</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  
+  <!-- 用户评价 -->
+  <view class="user-reviews card">
+    <view class="section-header">
+      <view class="section-title">用户评价</view>
+      <view class="review-stats">
+        <text class="review-rating">{{serviceDetail.rating}}</text>
+        <text class="review-count">{{reviews.length}}条评价</text>
+      </view>
+    </view>
+    
+    <!-- 评价列表 -->
+    <view class="review-list" wx:if="{{reviews.length > 0}}">
+      <view class="review-item" wx:for="{{reviews}}" wx:key="id">
+        <view class="review-user">
+          <image class="user-avatar" src="{{item.userAvatar}}" mode="aspectFill"></image>
+          <view class="user-info">
+            <text class="user-name">{{item.userName}}</text>
+            <view class="review-rating-time">
+              <view class="star-rating">
+                <image wx:for="{{5}}" wx:key="*this" wx:for-index="starIndex" wx:for-item="star" 
+                  src="/static/images/icons/{{starIndex < item.rating ? 'star-active' : 'star'}}.png" 
+                  class="star-icon" mode="aspectFit"></image>
+              </view>
+              <text class="review-time">{{item.createTime}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="review-content">{{item.content}}</view>
+        <view class="review-images" wx:if="{{item.images && item.images.length > 0}}">
+          <image wx:for="{{item.images}}" wx:key="*this" wx:for-item="img" src="{{img}}" class="review-image" mode="aspectFill" bindtap="previewReviewImage" data-urls="{{item.images}}" data-current="{{img}}"></image>
+        </view>
+        <view class="therapist-reply" wx:if="{{item.replyContent}}">
+          <text class="reply-label">店家回复：</text>
+          <text class="reply-content">{{item.replyContent}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 空评价状态 -->
+    <view class="empty-reviews" wx:else>
+      <text>暂无评价</text>
+    </view>
+    
+    <!-- 查看更多评价 -->
+    <view class="view-more-reviews" wx:if="{{reviews.length > 0 && hasMoreReviews}}" bindtap="loadMoreReviews">
+      <text>查看更多评价</text>
+      <image src="/static/images/icons/arrow-down.png" class="arrow-icon" mode="aspectFit"></image>
+    </view>
+  </view>
+  
+  <!-- 底部操作栏 -->
+  <view class="bottom-action-bar safe-bottom">
+    <view class="action-buttons">
+      <view class="action-button" bindtap="makePhoneCall">
+        <image src="/static/images/icons/phone.png" class="action-icon" mode="aspectFit"></image>
+        <text>电话咨询</text>
+      </view>
+      <view class="action-button" bindtap="navigateToShop">
+        <image src="/static/images/icons/shop.png" class="action-icon" mode="aspectFit"></image>
+        <text>店铺主页</text>
+      </view>
+    </view>
+    <view class="main-buttons">
+      <button class="btn btn-outline" bindtap="addToCart" wx:if="{{serviceDetail.type !== 'package'}}">加入购物车</button>
+      <button class="btn btn-primary" bindtap="buyNow">{{serviceDetail.type === 'package' ? '购买套餐' : '立即预约'}}</button>
+    </view>
+  </view>
+</view>

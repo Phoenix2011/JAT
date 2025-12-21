@@ -1,0 +1,412 @@
+/**appointment/confirm.wxss**/
+.container {
+  padding-bottom: 120rpx;
+}
+
+/* 卡片通用样式 */
+.card {
+  background-color: #FFFFFF;
+  border-radius: 8rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+/* 标题样式 */
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: var(--text-color);
+  position: relative;
+  padding-left: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8rpx;
+  height: 32rpx;
+  background-color: var(--primary-color);
+  border-radius: 4rpx;
+}
+
+/* 预约信息 */
+.info-item {
+  display: flex;
+  margin-bottom: 20rpx;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  width: 140rpx;
+  font-size: 28rpx;
+  color: var(--text-color-light);
+}
+
+.info-value {
+  flex: 1;
+  font-size: 28rpx;
+  color: var(--text-color);
+}
+
+/* 联系人信息 */
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-item:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  color: var(--text-color-light);
+  margin-bottom: 15rpx;
+}
+
+.form-input {
+  width: 100%;
+  height: 90rpx;
+  border-bottom: 1rpx solid var(--border-color);
+  font-size: 32rpx;
+  color: var(--text-color);
+}
+
+.form-textarea {
+  width: 100%;
+  height: 180rpx;
+  border: 1rpx solid var(--border-color);
+  border-radius: 8rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+  color: var(--text-color);
+}
+
+/* 支付方式 */
+.payment-options {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid var(--border-color);
+}
+
+.payment-option:last-child {
+  border-bottom: none;
+}
+
+.payment-option-content {
+  display: flex;
+  align-items: center;
+}
+
+.payment-icon {
+  width: 48rpx;
+  height: 48rpx;
+  margin-right: 20rpx;
+}
+
+.payment-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-name {
+  font-size: 28rpx;
+  color: var(--text-color);
+  margin-bottom: 6rpx;
+}
+
+.payment-desc {
+  font-size: 24rpx;
+  color: var(--text-color-light);
+}
+
+/* 优惠券选择 */
+.coupon-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid var(--border-color);
+}
+
+.coupon-text {
+  font-size: 28rpx;
+  color: var(--text-color);
+}
+
+.coupon-value {
+  font-size: 28rpx;
+  color: var(--primary-color);
+  font-weight: bold;
+  margin-right: 20rpx;
+}
+
+.arrow-icon {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+/* 会员卡选择 */
+.card-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid var(--border-color);
+}
+
+.card-text {
+  font-size: 28rpx;
+  color: var(--text-color);
+}
+
+.card-value {
+  font-size: 28rpx;
+  color: var(--primary-color);
+  margin-right: 20rpx;
+}
+
+/* 底部结算栏 */
+.bottom-action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+  z-index: 100;
+}
+
+.price-info {
+  display: flex;
+  align-items: center;
+}
+
+.price-label {
+  font-size: 28rpx;
+  color: var(--text-color);
+  margin-right: 10rpx;
+}
+
+.price-value {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.bottom-action-bar .btn {
+  width: 240rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+}
+
+/* 弹窗样式 */
+.popup-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.popup-content {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #FFFFFF;
+  border-radius: 20rpx 20rpx 0 0;
+  z-index: 1001;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.popup-content.show {
+  transform: translateY(0);
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid var(--border-color);
+}
+
+.popup-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.popup-body {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 30rpx;
+}
+
+.popup-footer {
+  padding: 20rpx 30rpx 50rpx;
+  border-top: 1rpx solid var(--border-color);
+}
+
+/* 优惠券列表 */
+.coupon-list {
+  margin-bottom: 30rpx;
+}
+
+.coupon-item {
+  display: flex;
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  background-color: #F8F8F8;
+  border-radius: 8rpx;
+  position: relative;
+}
+
+.coupon-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 30rpx;
+  border-right: 1rpx dashed var(--border-color);
+}
+
+.coupon-value {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 10rpx;
+}
+
+.coupon-condition {
+  font-size: 22rpx;
+  color: var(--text-color-light);
+}
+
+.coupon-right {
+  flex: 1;
+  padding: 0 30rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.coupon-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 10rpx;
+}
+
+.coupon-time {
+  font-size: 24rpx;
+  color: var(--text-color-light);
+  margin-bottom: 6rpx;
+}
+
+.coupon-scope {
+  font-size: 24rpx;
+  color: var(--text-color-light);
+}
+
+.coupon-check {
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+}
+
+.coupon-item.selected {
+  background-color: rgba(58, 119, 52, 0.05);
+  border: 2rpx solid var(--primary-color);
+}
+
+.no-coupon-item {
+  text-align: center;
+  padding: 30rpx 0;
+  font-size: 28rpx;
+  color: var(--text-color);
+}
+
+/* 会员卡列表 */
+.card-list {
+  margin-bottom: 30rpx;
+}
+
+.card-item {
+  display: flex;
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  background-color: #F8F8F8;
+  border-radius: 8rpx;
+  position: relative;
+}
+
+.card-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 10rpx;
+}
+
+.card-count {
+  font-size: 24rpx;
+  color: var(--primary-color);
+}
+
+.card-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-validity {
+  font-size: 24rpx;
+  color: var(--text-color-light);
+}
+
+.card-check {
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+}
+
+.card-item.selected {
+  background-color: rgba(58, 119, 52, 0.05);
+  border: 2rpx solid var(--primary-color);
+}
+
+.no-card-item {
+  text-align: center;
+  padding: 30rpx 0;
+  font-size: 28rpx;
+  color: var(--text-color);
+}

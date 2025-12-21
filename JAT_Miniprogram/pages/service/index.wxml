@@ -1,0 +1,83 @@
+<!--service/index.wxml-->
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input-wrap">
+      <icon type="search" size="16" color="#999999"></icon>
+      <input class="search-input" placeholder="搜索服务项目" confirm-type="search" bindinput="onSearchInput" bindconfirm="onSearch" value="{{searchKeyword}}"></input>
+      <icon wx:if="{{searchKeyword}}" type="clear" size="16" color="#999999" bindtap="clearSearch"></icon>
+    </view>
+  </view>
+  
+  <!-- 分类选项卡 -->
+  <view class="category-tabs">
+    <scroll-view scroll-x="{{true}}" class="tabs-scroll">
+      <view class="tabs">
+        <view class="tab-item {{currentTab === 'all' ? 'active' : ''}}" bindtap="switchTab" data-tab="all">全部</view>
+        <view class="tab-item {{currentTab === 'package' ? 'active' : ''}}" bindtap="switchTab" data-tab="package">套餐卡</view>
+        <view class="tab-item {{currentTab === item.id ? 'active' : ''}}" wx:for="{{categories}}" wx:key="id" bindtap="switchTab" data-tab="{{item.id}}">{{item.name}}</view>
+      </view>
+    </scroll-view>
+  </view>
+  
+  <!-- 筛选条件 -->
+  <view class="filter-bar">
+    <view class="filter-item {{sortType === 'default' ? 'active' : ''}}" bindtap="changeSort" data-type="default">
+      <text>默认</text>
+    </view>
+    <view class="filter-item {{sortType === 'sales' ? 'active' : ''}}" bindtap="changeSort" data-type="sales">
+      <text>销量</text>
+      <view class="sort-icon">
+        <image src="/static/images/icons/{{sortType === 'sales' && sortOrder === 'desc' ? 'sort-down-active' : 'sort-down'}}.png" mode="aspectFit"></image>
+      </view>
+    </view>
+    <view class="filter-item {{sortType === 'price' ? 'active' : ''}}" bindtap="changeSort" data-type="price">
+      <text>价格</text>
+      <view class="sort-icon">
+        <image src="/static/images/icons/{{sortType === 'price' && sortOrder === 'asc' ? 'sort-up-active' : 'sort-up'}}.png" mode="aspectFit"></image>
+        <image src="/static/images/icons/{{sortType === 'price' && sortOrder === 'desc' ? 'sort-down-active' : 'sort-down'}}.png" mode="aspectFit"></image>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 服务列表 -->
+  <view class="service-list" wx:if="{{services.length > 0}}">
+    <view class="service-item" wx:for="{{services}}" wx:key="id" bindtap="navigateToDetail" data-id="{{item.id}}" data-type="{{item.type}}">
+      <image class="service-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
+      <view class="service-info">
+        <view class="service-name">{{item.name}}</view>
+        <view class="service-desc ellipsis-2">{{item.description}}</view>
+        <view class="service-bottom">
+          <view class="service-price-box">
+            <text class="service-price">¥{{item.price}}</text>
+            <text class="service-original-price" wx:if="{{item.originalPrice}}">¥{{item.originalPrice}}</text>
+          </view>
+          <view class="service-sales">已售{{item.salesCount}}</view>
+        </view>
+        <view class="service-tags" wx:if="{{item.tags && item.tags.length > 0}}">
+          <text class="tag tag-primary" wx:for="{{item.tags}}" wx:key="*this" wx:for-item="tag">{{tag}}</text>
+        </view>
+        <view class="service-package-info" wx:if="{{item.type === 'package'}}">
+          <text>{{item.totalCount}}次</text>
+          <text class="package-validity">有效期{{item.validityDays}}天</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 空状态 -->
+  <view class="empty-state" wx:else>
+    <image class="empty-icon" src="/static/images/icons/empty.png" mode="aspectFit"></image>
+    <text class="empty-text">暂无相关服务</text>
+  </view>
+  
+  <!-- 加载更多 -->
+  <view class="loading-more" wx:if="{{services.length > 0 && hasMore}}">
+    <text>正在加载更多...</text>
+  </view>
+  
+  <!-- 没有更多 -->
+  <view class="no-more" wx:if="{{services.length > 0 && !hasMore}}">
+    <text>没有更多了</text>
+  </view>
+</view>

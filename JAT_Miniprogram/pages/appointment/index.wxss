@@ -1,0 +1,457 @@
+/**appointment/index.wxss**/
+.container {
+  padding-bottom: 120rpx;
+}
+
+/* 卡片通用样式 */
+.card {
+  background-color: #FFFFFF;
+  border-radius: 8rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+/* 标题样式 */
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: var(--text-color);
+  position: relative;
+  padding-left: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8rpx;
+  height: 32rpx;
+  background-color: var(--primary-color);
+  border-radius: 4rpx;
+}
+
+/* 日历部分 */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.calendar-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.calendar-nav {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-icon {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.calendar-weekdays {
+  display: flex;
+  margin-bottom: 10rpx;
+}
+
+.weekday {
+  flex: 1;
+  text-align: center;
+  font-size: 28rpx;
+  color: var(--text-color-light);
+  padding: 10rpx 0;
+}
+
+.calendar-days {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.day-item {
+  width: 14.28%;
+  height: 100rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10rpx 0;
+  position: relative;
+}
+
+.day-number {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 6rpx;
+}
+
+.day-status {
+  font-size: 22rpx;
+  color: var(--text-color-light);
+}
+
+.day-status .today {
+  color: var(--primary-color);
+}
+
+.day-status .full {
+  color: var(--danger-color);
+}
+
+.day-item.other-month .day-number {
+  color: #CCCCCC;
+}
+
+.day-item.disabled {
+  opacity: 0.5;
+}
+
+.day-item.selected {
+  background-color: rgba(58, 119, 52, 0.1);
+}
+
+.day-item.selected .day-number {
+  color: var(--primary-color);
+}
+
+.day-item.selected::after {
+  content: '';
+  position: absolute;
+  bottom: 10rpx;
+  width: 10rpx;
+  height: 10rpx;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+}
+
+/* 时间段选择 */
+.time-slots {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.time-slot {
+  width: calc(33.33% - 20rpx);
+  margin: 10rpx;
+  height: 120rpx;
+  background-color: #F8F8F8;
+  border-radius: 8rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.time-range {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 10rpx;
+}
+
+.slot-status {
+  font-size: 24rpx;
+  color: var(--text-color-light);
+}
+
+.slot-status .full {
+  color: var(--danger-color);
+}
+
+.time-slot.disabled {
+  opacity: 0.5;
+}
+
+.time-slot.selected {
+  background-color: rgba(58, 119, 52, 0.1);
+  border: 2rpx solid var(--primary-color);
+}
+
+.time-slot.selected .time-range {
+  color: var(--primary-color);
+}
+
+/* 服务选择 */
+.service-search {
+  margin-bottom: 20rpx;
+}
+
+.search-input-wrap {
+  display: flex;
+  align-items: center;
+  background-color: #F5F5F5;
+  border-radius: 30rpx;
+  padding: 0 20rpx;
+  height: 70rpx;
+}
+
+.search-input {
+  flex: 1;
+  height: 70rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+}
+
+.service-tabs {
+  display: flex;
+  overflow-x: auto;
+  margin-bottom: 20rpx;
+  white-space: nowrap;
+}
+
+.tab-item {
+  padding: 15rpx 30rpx;
+  font-size: 28rpx;
+  color: var(--text-color);
+  position: relative;
+}
+
+.tab-item.active {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 4rpx;
+  background-color: var(--primary-color);
+  border-radius: 2rpx;
+}
+
+.service-list {
+  max-height: 600rpx;
+  overflow-y: auto;
+}
+
+.service-item {
+  display: flex;
+  padding: 20rpx;
+  border-bottom: 1rpx solid var(--border-color);
+  position: relative;
+}
+
+.service-item:last-child {
+  border-bottom: none;
+}
+
+.service-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+}
+
+.service-info {
+  flex: 1;
+}
+
+.service-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 10rpx;
+}
+
+.service-desc {
+  font-size: 26rpx;
+  color: var(--text-color-light);
+  margin-bottom: 10rpx;
+}
+
+.service-price-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.service-price {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.service-duration {
+  font-size: 26rpx;
+  color: var(--text-color-light);
+}
+
+.service-check {
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+}
+
+.service-item.selected {
+  background-color: rgba(58, 119, 52, 0.05);
+}
+
+/* 技师选择 */
+.therapist-list {
+  max-height: 600rpx;
+  overflow-y: auto;
+}
+
+.therapist-item {
+  display: flex;
+  padding: 20rpx;
+  border-bottom: 1rpx solid var(--border-color);
+  position: relative;
+}
+
+.therapist-item:last-child {
+  border-bottom: none;
+}
+
+.therapist-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.random-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  background-color: #F5F5F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  color: var(--text-color);
+}
+
+.therapist-info {
+  flex: 1;
+}
+
+.therapist-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 6rpx;
+}
+
+.therapist-title {
+  font-size: 26rpx;
+  color: var(--text-color-light);
+  margin-bottom: 6rpx;
+}
+
+.therapist-desc {
+  font-size: 26rpx;
+  color: var(--text-color-light);
+  margin-bottom: 6rpx;
+}
+
+.therapist-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6rpx;
+}
+
+.star-rating {
+  display: flex;
+  margin-right: 10rpx;
+}
+
+.star-icon {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 4rpx;
+}
+
+.rating-score {
+  font-size: 24rpx;
+  color: var(--primary-color);
+  font-weight: bold;
+  margin-right: 6rpx;
+}
+
+.rating-count {
+  font-size: 22rpx;
+  color: var(--text-color-light);
+}
+
+.therapist-tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 22rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
+  margin-right: 10rpx;
+  margin-bottom: 6rpx;
+}
+
+.tag-primary {
+  background-color: rgba(58, 119, 52, 0.1);
+  color: var(--primary-color);
+}
+
+.therapist-check {
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+}
+
+.therapist-item.selected {
+  background-color: rgba(58, 119, 52, 0.05);
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60rpx 0;
+}
+
+.empty-icon {
+  width: 160rpx;
+  height: 160rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: var(--text-color-light);
+}
+
+/* 底部操作栏 */
+.bottom-action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #FFFFFF;
+  padding: 20rpx;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+  z-index: 100;
+}
+
+.btn-block {
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 32rpx;
+}

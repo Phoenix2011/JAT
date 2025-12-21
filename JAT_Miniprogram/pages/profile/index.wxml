@@ -1,0 +1,108 @@
+<view class="profile-container">
+  <!-- 用户基本信息区域 -->
+  <view class="user-info-section">
+    <view class="user-avatar-container">
+      <image class="user-avatar" src="{{userInfo.avatarUrl || '/assets/images/default-avatar.png'}}"></image>
+    </view>
+    <view class="user-details">
+      <view class="user-name">{{userInfo.nickName || '未登录'}}</view>
+      <view class="user-id">ID: {{userInfo.userId || '--'}}</view>
+      <view class="user-balance">
+        <text>佣金余额：</text>
+        <text class="balance-amount">¥{{userInfo.balance || '0.00'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能入口区域 -->
+  <view class="function-section">
+    <!-- 我的预约 -->
+    <view class="function-item" bindtap="navigateTo" data-url="/pages/profile/appointment/index">
+      <view class="function-icon">
+        <image src="/assets/icons/appointment.png"></image>
+      </view>
+      <view class="function-info">
+        <view class="function-title">我的预约</view>
+        <view class="function-desc">查看进行中和已完成的预约</view>
+      </view>
+      <view class="function-arrow">
+        <image src="/assets/icons/arrow-right.png"></image>
+      </view>
+    </view>
+
+    <!-- 我的次卡 -->
+    <view class="function-item" bindtap="navigateTo" data-url="/pages/profile/card/index">
+      <view class="function-icon">
+        <image src="/assets/icons/card.png"></image>
+      </view>
+      <view class="function-info">
+        <view class="function-title">我的次卡</view>
+        <view class="function-desc">查看已办卡项和使用记录</view>
+      </view>
+      <view class="function-arrow">
+        <image src="/assets/icons/arrow-right.png"></image>
+      </view>
+    </view>
+
+    <!-- 消费记录 -->
+    <view class="function-item" bindtap="navigateTo" data-url="/pages/profile/consumption/index">
+      <view class="function-icon">
+        <image src="/assets/icons/consumption.png"></image>
+      </view>
+      <view class="function-info">
+        <view class="function-title">消费记录</view>
+        <view class="function-desc">查看单次购买和耗卡记录</view>
+      </view>
+      <view class="function-arrow">
+        <image src="/assets/icons/arrow-right.png"></image>
+      </view>
+    </view>
+
+    <!-- 我的邀请 -->
+    <view class="function-item" bindtap="navigateTo" data-url="/pages/profile/invitation/index">
+      <view class="function-icon">
+        <image src="/assets/icons/invitation.png"></image>
+      </view>
+      <view class="function-info">
+        <view class="function-title">我的邀请</view>
+        <view class="function-desc">查看邀请码和佣金明细</view>
+      </view>
+      <view class="function-arrow">
+        <image src="/assets/icons/arrow-right.png"></image>
+      </view>
+    </view>
+
+    <!-- 会员信息 -->
+    <view class="function-item" bindtap="navigateTo" data-url="/pages/profile/member/index">
+      <view class="function-icon">
+        <image src="/assets/icons/member.png"></image>
+      </view>
+      <view class="function-info">
+        <view class="function-title">会员信息</view>
+        <view class="function-desc">修改用户名和手机号码</view>
+      </view>
+      <view class="function-arrow">
+        <image src="/assets/icons/arrow-right.png"></image>
+      </view>
+    </view>
+
+    <!-- 联系客服 -->
+    <view class="function-item" bindtap="contactService">
+      <view class="function-icon">
+        <image src="/assets/icons/service.png"></image>
+      </view>
+      <view class="function-info">
+        <view class="function-title">联系客服</view>
+        <view class="function-desc">获取店长微信联系方式</view>
+      </view>
+      <view class="function-arrow">
+        <image src="/assets/icons/arrow-right.png"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 退出登录按钮 -->
+  <view class="logout-section">
+    <button class="logout-button" bindtap="logout">退出登录</button>
+  </view>
+</view>

@@ -1,0 +1,144 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- 顶部轮播图 -->
+  <swiper class="banner" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{3000}}" duration="{{500}}">
+    <block wx:for="{{banners}}" wx:key="id">
+      <swiper-item>
+        <image src="{{item.imageUrl}}" class="banner-image" mode="aspectFill" bindtap="onBannerTap" data-id="{{item.id}}" data-type="{{item.type}}" data-url="{{item.linkUrl}}"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!-- 服务分类导航 -->
+  <view class="category-nav">
+    <view class="category-item" wx:for="{{categories}}" wx:key="id" bindtap="onCategoryTap" data-id="{{item.id}}">
+      <image src="{{item.iconUrl}}" class="category-icon" mode="aspectFit"></image>
+      <text class="category-name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- 推荐服务 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">推荐服务</text>
+      <view class="section-more" bindtap="navigateToService">
+        <text>查看更多</text>
+        <text class="icon-arrow">></text>
+      </view>
+    </view>
+    <view class="service-list">
+      <view class="service-item" wx:for="{{recommendServices}}" wx:key="id" bindtap="navigateToServiceDetail" data-id="{{item.id}}">
+        <image src="{{item.imageUrl}}" class="service-image" mode="aspectFill"></image>
+        <view class="service-info">
+          <text class="service-name">{{item.name}}</text>
+          <view class="service-price-box">
+            <text class="service-price">¥{{item.price}}</text>
+            <text class="service-original-price" wx:if="{{item.originalPrice}}">¥{{item.originalPrice}}</text>
+          </view>
+          <view class="service-tags">
+            <text class="tag tag-primary" wx:for="{{item.tags}}" wx:key="*this" wx:for-item="tag">{{tag}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 热门套餐 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">热门套餐</text>
+      <view class="section-more" bindtap="navigateToPackage">
+        <text>查看更多</text>
+        <text class="icon-arrow">></text>
+      </view>
+    </view>
+    <view class="package-list">
+      <view class="package-item" wx:for="{{hotPackages}}" wx:key="id" bindtap="navigateToServiceDetail" data-id="{{item.id}}">
+        <image src="{{item.imageUrl}}" class="package-image" mode="aspectFill"></image>
+        <view class="package-info">
+          <text class="package-name">{{item.name}}</text>
+          <view class="package-desc ellipsis-2">{{item.description}}</view>
+          <view class="package-price-box">
+            <text class="package-price">¥{{item.price}}</text>
+            <text class="package-original-price" wx:if="{{item.originalPrice}}">¥{{item.originalPrice}}</text>
+          </view>
+          <view class="package-count">
+            <text>{{item.totalCount}}次</text>
+            <text class="package-validity">有效期{{item.validityDays}}天</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 技师推荐 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">技师推荐</text>
+      <view class="section-more" bindtap="navigateToTherapist">
+        <text>查看更多</text>
+        <text class="icon-arrow">></text>
+      </view>
+    </view>
+    <scroll-view scroll-x="{{true}}" class="therapist-scroll">
+      <view class="therapist-list">
+        <view class="therapist-item" wx:for="{{recommendTherapists}}" wx:key="id" bindtap="navigateToTherapistDetail" data-id="{{item.id}}">
+          <image src="{{item.avatarUrl}}" class="therapist-avatar" mode="aspectFill"></image>
+          <text class="therapist-name">{{item.name}}</text>
+          <text class="therapist-title">{{item.title}}</text>
+          <view class="therapist-rating">
+            <text class="rating-score">{{item.rating}}</text>
+            <text class="rating-count">{{item.ratingCount}}评价</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 店铺信息 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">店铺信息</text>
+    </view>
+    <view class="shop-info card">
+      <view class="shop-info-item" bindtap="makePhoneCall">
+        <view class="shop-info-icon">
+          <image src="/static/images/icons/phone.png" mode="aspectFit"></image>
+        </view>
+        <view class="shop-info-content">
+          <text class="shop-info-label">联系电话</text>
+          <text class="shop-info-value">{{shopInfo.phone}}</text>
+        </view>
+        <view class="shop-info-arrow">
+          <text class="icon-arrow">></text>
+        </view>
+      </view>
+      <view class="shop-info-item" bindtap="openLocation">
+        <view class="shop-info-icon">
+          <image src="/static/images/icons/location.png" mode="aspectFit"></image>
+        </view>
+        <view class="shop-info-content">
+          <text class="shop-info-label">店铺地址</text>
+          <text class="shop-info-value">{{shopInfo.address}}</text>
+        </view>
+        <view class="shop-info-arrow">
+          <text class="icon-arrow">></text>
+        </view>
+      </view>
+      <view class="shop-info-item">
+        <view class="shop-info-icon">
+          <image src="/static/images/icons/time.png" mode="aspectFit"></image>
+        </view>
+        <view class="shop-info-content">
+          <text class="shop-info-label">营业时间</text>
+          <text class="shop-info-value">{{shopInfo.businessHours}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部预约按钮 -->
+  <view class="appointment-btn-container safe-bottom">
+    <button class="btn btn-primary btn-block" bindtap="navigateToAppointment">立即预约</button>
+  </view>
+</view>

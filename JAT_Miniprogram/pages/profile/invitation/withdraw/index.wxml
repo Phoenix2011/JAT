@@ -1,0 +1,69 @@
+<view class="withdraw-container">
+  <!-- 佣金信息区域 -->
+  <view class="commission-info">
+    <view class="info-item">
+      <view class="info-label">可提现佣金</view>
+      <view class="info-value">¥{{availableAmount}}</view>
+    </view>
+    <view class="info-item">
+      <view class="info-label">提现比例</view>
+      <view class="info-value">{{withdrawRatio}}%</view>
+      <view class="info-tip">（提现将按此比例折算实际到账金额）</view>
+    </view>
+  </view>
+
+  <!-- 提现金额输入区域 -->
+  <view class="withdraw-amount-section">
+    <view class="section-title">提现金额</view>
+    <view class="amount-input-area">
+      <view class="currency-symbol">¥</view>
+      <input class="amount-input" type="digit" value="{{inputAmount}}" bindinput="onAmountInput" placeholder="请输入提现金额" />
+    </view>
+    <view class="amount-tips">
+      <view class="tip-item">
+        <text>消耗佣金：</text>
+        <text class="highlight">¥{{consumeAmount}}</text>
+      </view>
+      <view class="tip-item">
+        <text>实际到账：</text>
+        <text class="highlight">¥{{actualAmount}}</text>
+      </view>
+    </view>
+    <view class="quick-actions">
+      <button class="quick-btn" bindtap="setFullAmount">全部提现</button>
+    </view>
+  </view>
+
+  <!-- 提现方式选择 -->
+  <view class="withdraw-method-section">
+    <view class="section-title">提现方式</view>
+    <view class="method-item">
+      <view class="method-icon">
+        <image src="/assets/icons/wechat-pay.png"></image>
+      </view>
+      <view class="method-info">
+        <view class="method-name">微信钱包</view>
+        <view class="method-desc">提现到微信钱包</view>
+      </view>
+      <view class="method-selected">
+        <icon type="success" color="#ff6b6b" size="18"></icon>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提现须知 -->
+  <view class="withdraw-notice">
+    <view class="notice-title">提现须知</view>
+    <view class="notice-content">
+      <view class="notice-item">1. 提现金额不能超过可提现佣金</view>
+      <view class="notice-item">2. 提现将按照{{withdrawRatio}}%的比例折算实际到账金额</view>
+      <view class="notice-item">3. 提现申请提交后，将在1-3个工作日内处理</view>
+      <view class="notice-item">4. 提现金额将直接转入您的微信钱包</view>
+    </view>
+  </view>
+
+  <!-- 提现按钮 -->
+  <view class="withdraw-action">
+    <button class="withdraw-btn" bindtap="submitWithdraw" disabled="{{!canWithdraw}}">确认提现</button>
+  </view>
+</view>

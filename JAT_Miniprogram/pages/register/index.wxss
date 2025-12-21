@@ -1,0 +1,150 @@
+/**register.wxss**/
+.container {
+  padding: 40rpx 30rpx;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.register-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 60rpx;
+  padding-top: 40rpx;
+}
+
+.logo {
+  width: 160rpx;
+  height: 160rpx;
+  margin-bottom: 20rpx;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 10rpx;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: var(--text-color-light);
+}
+
+.register-form {
+  width: 100%;
+}
+
+.form-group {
+  background-color: #FFFFFF;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-item:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  color: var(--text-color-light);
+  margin-bottom: 15rpx;
+}
+
+.form-input {
+  width: 100%;
+  height: 90rpx;
+  border-bottom: 1rpx solid var(--border-color);
+  font-size: 32rpx;
+  color: var(--text-color);
+}
+
+.verification-code {
+  position: relative;
+}
+
+.code-btn {
+  position: absolute;
+  right: 0;
+  bottom: 20rpx;
+  background-color: transparent;
+  color: var(--primary-color);
+  font-size: 28rpx;
+  padding: 0;
+  line-height: 1;
+  border: none;
+  min-height: 0;
+}
+
+.code-btn::after {
+  border: none;
+}
+
+.code-btn.disabled {
+  color: var(--text-color-light);
+}
+
+.radio-group {
+  display: flex;
+  align-items: center;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  margin-right: 60rpx;
+  font-size: 32rpx;
+  color: var(--text-color);
+}
+
+.register-btn {
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 32rpx;
+  margin-bottom: 30rpx;
+}
+
+.agreement {
+  font-size: 24rpx;
+  color: var(--text-color-light);
+  margin-bottom: 60rpx;
+  display: flex;
+  align-items: center;
+}
+
+.agreement checkbox {
+  transform: scale(0.8);
+  margin-right: 5rpx;
+}
+
+.agreement-text {
+  margin-right: 5rpx;
+}
+
+.agreement-link {
+  color: var(--primary-color);
+  margin-right: 5rpx;
+}
+
+.register-footer {
+  width: 100%;
+}
+
+.login-link {
+  text-align: center;
+  font-size: 28rpx;
+  color: var(--text-color-light);
+}
+
+.link {
+  color: var(--primary-color);
+  margin-left: 10rpx;
+}

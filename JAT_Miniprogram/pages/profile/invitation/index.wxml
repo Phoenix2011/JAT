@@ -1,0 +1,113 @@
+<view class="invitation-container">
+  <!-- 邀请码填写区域（仅未消费用户可见） -->
+  <view class="input-invitation-section" wx:if="{{canInputInvitation}}">
+    <view class="section-title">填写邀请码</view>
+    <view class="input-form">
+      <input class="invitation-input" placeholder="请输入邀请码" bindinput="onInvitationInput" value="{{inputInvitationCode}}"/>
+      <button class="submit-btn" bindtap="submitInvitationCode" disabled="{{!inputInvitationCode}}">提交</button>
+    </view>
+    <view class="input-tips">注：仅限首次消费前填写，且只能填写一次</view>
+  </view>
+
+  <!-- 佣金统计区域 -->
+  <view class="commission-summary">
+    <view class="summary-item total">
+      <view class="summary-value">¥{{commissionInfo.totalAmount || '0.00'}}</view>
+      <view class="summary-label">佣金获取总额</view>
+    </view>
+    <view class="summary-item available">
+      <view class="summary-value">¥{{commissionInfo.availableAmount || '0.00'}}</view>
+      <view class="summary-label">可用佣金 <text class="frozen-amount">(冻结: ¥{{commissionInfo.frozenAmount || '0.00'}})</text></view>
+    </view>
+  </view>
+
+  <!-- 我的邀请码区域 -->
+  <view class="my-invitation-section">
+    <view class="section-title">我的邀请码</view>
+    <view class="invitation-code-box">
+      <view class="invitation-code">{{invitationCode || '加载中...'}}</view>
+      <button class="copy-btn" bindtap="copyInvitationCode">复制</button>
+    </view>
+    <view class="share-tips">分享给好友，邀请注册后双方均可获得奖励</view>
+  </view>
+
+  <!-- 提现按钮 -->
+  <view class="withdraw-section">
+    <button class="withdraw-btn" bindtap="navigateToWithdraw" disabled="{{!commissionInfo.availableAmount || commissionInfo.availableAmount <= 0}}">提现</button>
+  </view>
+
+  <!-- 佣金记录标签页 -->
+  <view class="records-tabs">
+    <view class="tab-header">
+      <view class="tab-item {{activeTab === 'commission' ? 'active' : ''}}" bindtap="switchTab" data-tab="commission">佣金获取记录</view>
+      <view class="tab-item {{activeTab === 'unfreeze' ? 'active' : ''}}" bindtap="switchTab" data-tab="unfreeze">佣金解冻记录</view>
+      <view class="tab-item {{activeTab === 'withdraw' ? 'active' : ''}}" bindtap="switchTab" data-tab="withdraw">提现记录</view>
+    </view>
+    <view class="tab-content">
+      <!-- 佣金获取记录 -->
+      <view class="record-list" wx:if="{{activeTab === 'commission'}}">
+        <block wx:if="{{commissionRecords.length > 0}}">
+          <view wx:for="{{commissionRecords}}" wx:key="id" class="record-item">
+            <view class="record-info">
+              <view class="record-user">被邀请人: {{item.inviteeNickname}}</view>
+              <view class="record-time">{{item.createTime}}</view>
+            </view>
+            <view class="record-detail">
+              <view class="record-desc">{{item.orderDesc}}</view>
+              <view class="record-amount">+¥{{item.amount}}</view>
+            </view>
+            <view class="record-status {{item.status === 'frozen' ? 'frozen' : 'unfrozen'}}">
+              {{item.status === 'frozen' ? '冻结中' : '已解冻'}}
+            </view>
+          </view>
+        </block>
+        <view wx:else class="empty-tip">
+          <image class="empty-icon" src="/assets/icons/empty.png"></image>
+          <view class="empty-text">暂无佣金获取记录</view>
+        </view>
+      </view>
+
+      <!-- 佣金解冻记录 -->
+      <view class="record-list" wx:if="{{activeTab === 'unfreeze'}}">
+        <block wx:if="{{unfreezeRecords.length > 0}}">
+          <view wx:for="{{unfreezeRecords}}" wx:key="id" class="record-item">
+            <view class="record-info">
+              <view class="record-user">被邀请人: {{item.inviteeNickname}}</view>
+              <view class="record-time">{{item.unfreezeTime}}</view>
+            </view>
+            <view class="record-detail">
+              <view class="record-desc">{{item.serviceDesc}}</view>
+              <view class="record-amount">+¥{{item.unfreezeAmount}}</view>
+            </view>
+            <view class="record-ratio">解冻比例: {{item.unfreezeRatio}}%</view>
+          </view>
+        </block>
+        <view wx:else class="empty-tip">
+          <image class="empty-icon" src="/assets/icons/empty.png"></image>
+          <view class="empty-text">暂无佣金解冻记录</view>
+        </view>
+      </view>
+
+      <!-- 提现记录 -->
+      <view class="record-list" wx:if="{{activeTab === 'withdraw'}}">
+        <block wx:if="{{withdrawRecords.length > 0}}">
+          <view wx:for="{{withdrawRecords}}" wx:key="id" class="record-item">
+            <view class="record-info">
+              <view class="record-status-text">{{item.status === 'pending' ? '处理中' : item.status === 'success' ? '提现成功' : '提现失败'}}</view>
+              <view class="record-time">{{item.createTime}}</view>
+            </view>
+            <view class="record-detail">
+              <view class="record-desc">提现至微信钱包</view>
+              <view class="record-amount">-¥{{item.requestAmount}}</view>
+            </view>
+            <view class="record-actual">实际到账: ¥{{item.actualAmount}}</view>
+          </view>
+        </block>
+        <view wx:else class="empty-tip">
+          <image class="empty-icon" src="/assets/icons/empty.png"></image>
+          <view class="empty-text">暂无提现记录</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,218 @@
+/* 全局样式优化 - 参考上传图片风格 */
+
+/* 基础颜色定义 */
+page {
+  --primary-color: #ff6b6b; /* 主色调，用于按钮、高亮文字等 */
+  --secondary-color: #4cd964; /* 辅助色，用于状态指示等 */
+  --background-color: #f8f8f8; /* 背景色 */
+  --card-background: #ffffff; /* 卡片背景色 */
+  --text-primary: #333333; /* 主要文字颜色 */
+  --text-secondary: #666666; /* 次要文字颜色 */
+  --text-light: #999999; /* 浅色文字 */
+  --border-color: #f0f0f0; /* 边框颜色 */
+  --shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05); /* 阴影效果 */
+}
+
+/* 通用容器样式 */
+.container {
+  padding: 20rpx;
+  background-color: var(--background-color);
+  min-height: 100vh;
+}
+
+/* 卡片样式统一 */
+.card {
+  background-color: var(--card-background);
+  border-radius: 16rpx; /* 增大圆角 */
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: var(--shadow);
+}
+
+/* 按钮样式统一 */
+.btn {
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  border-radius: 44rpx; /* 圆角按钮 */
+  font-size: 32rpx;
+  padding: 0;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1rpx solid var(--primary-color);
+}
+
+.btn-small {
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 26rpx;
+  border-radius: 30rpx;
+}
+
+/* 标题样式统一 */
+.section-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 20rpx;
+}
+
+/* 列表项样式统一 */
+.list-item {
+  display: flex;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid var(--border-color);
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+/* 图标样式统一 */
+.icon-container {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20rpx;
+}
+
+.icon-container image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+/* 表单样式统一 */
+.form-item {
+  margin-bottom: 20rpx;
+}
+
+.form-label {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  margin-bottom: 10rpx;
+}
+
+.form-input {
+  width: 100%;
+  height: 80rpx;
+  background-color: #f8f8f8;
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+}
+
+/* 空状态提示统一 */
+.empty-tip {
+  padding: 60rpx 0;
+  text-align: center;
+}
+
+.empty-icon {
+  width: 100rpx;
+  height: 100rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: var(--text-light);
+}
+
+/* 标签页样式统一 */
+.tabs {
+  background-color: var(--card-background);
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.tab-header {
+  display: flex;
+  border-bottom: 1rpx solid var(--border-color);
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  padding: 25rpx 0;
+  position: relative;
+}
+
+.tab-item.active {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 4rpx;
+  background-color: var(--primary-color);
+  border-radius: 2rpx;
+}
+
+/* 弹窗样式统一 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  background-color: var(--card-background);
+  border-radius: 16rpx;
+  overflow: hidden;
+  z-index: 1001;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid var(--border-color);
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.modal-close {
+  font-size: 40rpx;
+  color: var(--text-light);
+  padding: 0 10rpx;
+}
+
+.modal-body {
+  padding: 30rpx;
+  max-height: 70vh;
+  overflow-y: auto;
+}

@@ -1,0 +1,58 @@
+// app.json 更新，添加个人中心页面路径
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/index",
+    "pages/register/index",
+    "pages/service/index",
+    "pages/service/detail",
+    "pages/appointment/index",
+    "pages/appointment/confirm",
+    "pages/profile/index",
+    "pages/profile/appointment/index",
+    "pages/profile/card/index",
+    "pages/profile/consumption/index",
+    "pages/profile/invitation/index",
+    "pages/profile/member/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "推拿艾灸馆",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#ff6b6b",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/icons/home.png",
+        "selectedIconPath": "assets/icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/service/index",
+        "text": "服务",
+        "iconPath": "assets/icons/service.png",
+        "selectedIconPath": "assets/icons/service-active.png"
+      },
+      {
+        "pagePath": "pages/appointment/index",
+        "text": "预约",
+        "iconPath": "assets/icons/appointment.png",
+        "selectedIconPath": "assets/icons/appointment-active.png"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的",
+        "iconPath": "assets/icons/profile.png",
+        "selectedIconPath": "assets/icons/profile-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
