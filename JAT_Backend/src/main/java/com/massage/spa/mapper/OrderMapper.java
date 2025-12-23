@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ public interface OrderMapper extends BaseMapper<Order> {
             "<if test='orderNo != null and orderNo != \"\"'> AND o.order_no LIKE CONCAT('%', #{orderNo}, '%') </if> " +
             "<if test='customerName != null and customerName != \"\"'> AND c.name LIKE CONCAT('%', #{customerName}, '%') </if> " +
             "<if test='customerPhone != null and customerPhone != \"\"'> AND c.phone LIKE CONCAT('%', #{customerPhone}, '%') </if> " +
+            "<if test='startDate != null'> AND date(o.create_time) between #{startDate} and #{endDate} </if> " +
             "<if test='status != null'> AND o.status = #{status} </if> " +
             "ORDER BY o.create_time DESC " +
             "LIMIT #{offset}, #{limit}" +
@@ -32,6 +34,8 @@ public interface OrderMapper extends BaseMapper<Order> {
     List<Map<String, Object>> selectOrdersByPage(@Param("orderNo") String orderNo,
                                                @Param("customerName") String customerName,
                                                @Param("customerPhone") String customerPhone,
+                                               @Param("startDate") LocalDate startDate,
+                                               @Param("endDate") LocalDate endDate,
                                                @Param("status") Integer status,
                                                @Param("offset") Long offset,
                                                @Param("limit") Long limit);
@@ -46,12 +50,15 @@ public interface OrderMapper extends BaseMapper<Order> {
             "<if test='customerId != null'> AND o.customer_id = #{customerId} </if> " +
             "<if test='customerName != null and customerName != \"\"'> AND c.name LIKE CONCAT('%', #{customerName}, '%') </if> " +
             "<if test='customerPhone != null and customerPhone != \"\"'> AND c.phone LIKE CONCAT('%', #{customerPhone}, '%') </if> " +
+            "<if test='startDate != null'> AND date(o.create_time) between #{startDate} and #{endDate} </if> " +
             "<if test='status != null'> AND o.status = #{status} </if> " +
             "</script>")
     Long countOrders(@Param("orderNo") String orderNo,
                     @Param("customerId") Long customerId,
                     @Param("customerName") String customerName,
                     @Param("customerPhone") String customerPhone,
+                     @Param("startDate") LocalDate startDate,
+                     @Param("endDate") LocalDate endDate,
                     @Param("status") Integer status);
     
     /**

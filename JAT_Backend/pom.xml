@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.massage</groupId>
-    <artifactId>spa-management</artifactId>
+    <artifactId>JAT_Backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spa-management</name>
+    <name>JAT_Backend</name>
     <description>Massage Spa Management System</description>
     
     <properties>

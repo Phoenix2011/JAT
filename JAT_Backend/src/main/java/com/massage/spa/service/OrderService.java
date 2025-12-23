@@ -3,6 +3,7 @@ package com.massage.spa.service;
 import com.massage.spa.entity.Order;
 import com.massage.spa.entity.OrderDetail;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +22,8 @@ public interface OrderService {
      * @param size 每页记录数
      * @return 订单列表
      */
-    List<Map<String, Object>> listByPage(String orderNo, String customerName, String customerPhone, 
-                                        Integer status, Long current, Long size);
+    List<Map<String, Object>> listByPage(String orderNo, String customerName, String customerPhone, LocalDate startDate, LocalDate endDate,
+                                         Integer status, Long current, Long size);
 
     /**
      * 获取订单总数
@@ -32,7 +33,7 @@ public interface OrderService {
      * @param status 状态
      * @return 订单总数
      */
-    Long count(String orderNo, Long customerId, String customerName, String customerPhone, Integer status);
+    Long count(String orderNo, Long customerId, String customerName, String customerPhone, LocalDate startDate, LocalDate endDate, Integer status);
 
     /**
      * 根据ID获取订单

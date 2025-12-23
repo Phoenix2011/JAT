@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -40,15 +41,15 @@ public class OrderServiceImpl implements OrderService {
     private ServiceItemMapper serviceItemMapper;
 
     @Override
-    public List<Map<String, Object>> listByPage(String orderNo, String customerName, String customerPhone, 
-                                              Integer status, Long current, Long size) {
-        return orderMapper.selectOrdersByPage(orderNo, customerName, customerPhone, status, 
+    public List<Map<String, Object>> listByPage(String orderNo, String customerName, String customerPhone, LocalDate startDate, LocalDate endDate,
+                                                Integer status, Long current, Long size) {
+        return orderMapper.selectOrdersByPage(orderNo, customerName, customerPhone, startDate, endDate, status,
                 (current - 1) * size, size);
     }
 
     @Override
-    public Long count(String orderNo, Long customerId, String customerName, String customerPhone, Integer status) {
-        return orderMapper.countOrders(orderNo, customerId, customerName, customerPhone, status);
+    public Long count(String orderNo, Long customerId, String customerName, String customerPhone, LocalDate startDate, LocalDate endDate, Integer status) {
+        return orderMapper.countOrders(orderNo, customerId, customerName, customerPhone, startDate, endDate, status);
     }
 
     @Override

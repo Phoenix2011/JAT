@@ -5,7 +5,7 @@ server:
 
 spring:
   application:
-    name: spa-management
+    name: JAT_Backend
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver

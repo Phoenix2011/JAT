@@ -10,10 +10,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -38,11 +40,13 @@ public class OrderController {
             @Parameter(description = "订单编号") @RequestParam(required = false) String orderNo,
             @Parameter(description = "顾客姓名") @RequestParam(required = false) String customerName,
             @Parameter(description = "顾客手机号") @RequestParam(required = false) String customerPhone,
+            @Parameter(description = "开始日期") @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
+            @Parameter(description = "结束日期") @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate,
             @Parameter(description = "状态") @RequestParam(required = false) Integer status,
             @Parameter(description = "分页参数") PageQuery pageQuery) {
-        List<Map<String, Object>> list = orderService.listByPage(orderNo, customerName, customerPhone, 
+        List<Map<String, Object>> list = orderService.listByPage(orderNo, customerName, customerPhone, startDate, endDate,
                 status, pageQuery.getPageNum(), pageQuery.getPageSize());
-        Long total = orderService.count(orderNo, null, customerName, customerPhone, status);
+        Long total = orderService.count(orderNo, null, customerName, customerPhone, startDate, endDate, status);
         PageResult<Map<String, Object>> pageResult = new PageResult<>(total, pageQuery.getPageSize(), pageQuery.getPageNum(), list);
         return Result.success(pageResult);
     }
@@ -55,7 +59,7 @@ public class OrderController {
             @Parameter(description = "顾客ID") @PathVariable Long customerId,
             @Parameter(description = "分页参数") PageQuery pageQuery) {
         List<Map<String, Object>> list = orderService.getOrdersByCustomerId(customerId, pageQuery.getPageNum(), pageQuery.getPageSize());
-        Long total = orderService.count(null, customerId, null, null, null);
+        Long total = orderService.count(null, customerId, null, null, null, null, null);
         PageResult<Map<String, Object>> pageResult = new PageResult<>(total, pageQuery.getPageSize(), pageQuery.getPageNum(), list);
         return Result.success(pageResult);
     }
