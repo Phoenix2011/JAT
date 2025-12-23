@@ -2,13 +2,13 @@
   <div class="order-container">
     <div class="search-bar">
       <el-form :inline="true" :model="queryParams" class="demo-form-inline">
-        <el-form-item label="订单号">
+        <el-form-item label="订单号" style="width:5%; min-width: 200px;">
           <el-input v-model="queryParams.orderNo" placeholder="请输入订单号" clearable @keyup.enter="handleQuery" />
         </el-form-item>
-        <el-form-item label="顾客姓名">
+        <el-form-item label="顾客姓名" style="width:5%; min-width: 200px;">
           <el-input v-model="queryParams.customerName" placeholder="请输入顾客姓名" clearable @keyup.enter="handleQuery" />
         </el-form-item>
-        <el-form-item label="订单日期">
+        <el-form-item label="订单日期" style="width:20%; min-width: 300px;">
           <el-date-picker
             v-model="dateRange"
             type="daterange"
@@ -19,7 +19,7 @@
             @change="handleDateRangeChange"
           />
         </el-form-item>
-        <el-form-item label="状态">
+        <el-form-item label="状态" style="min-width: 180px;">
           <el-select v-model="queryParams.status" placeholder="请选择状态" clearable>
             <el-option
               v-for="dict in statusOptions"
